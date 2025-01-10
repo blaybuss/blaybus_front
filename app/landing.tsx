@@ -10,6 +10,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -49,8 +50,9 @@ const slides: Slide[] = [
   },
 ];
 
-export default function LandingPage({ navigation }: { navigation: any }) {
+export default function LandingPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
@@ -59,7 +61,7 @@ export default function LandingPage({ navigation }: { navigation: any }) {
 
   const handleButtonPress = () => {
     if (currentIndex === 2) {
-      navigation.replace("/login");
+      router.replace("/login");
     }
   };
 

@@ -8,23 +8,12 @@ import {
   Alert,
 } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useRouter } from "expo-router";
 import Logo from "../assets/images/LOGO.svg";
 import MessageIcon from "../assets/images/message.svg";
 import LockIcon from "../assets/images/lock.svg";
 
-type RootStackParamList = {
-  LoginPage: undefined;
-  mainPage: undefined;
-};
-
-type LoginScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  "LoginPage"
->;
-
-// 목 데이터 (근데 관리자 목데이터도 추가해야할듯)
+// 목 데이터
 const mockUsers = [
   { username: "1234", password: "password123" },
   { username: "5678", password: "happy123" },
@@ -35,7 +24,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const navigation = useNavigation<LoginScreenNavigationProp>();
+  const router = useRouter(); // Expo Router의 useRouter 사용
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -51,8 +40,8 @@ export default function LoginPage() {
       );
 
       if (user) {
-        Alert.alert("로그인 성공", `환영합니다`);
-        navigation.replace("mainPage"); 
+        Alert.alert("로그인 성공", `환영합니다!`);
+        router.replace("/main"); 
       } else {
         Alert.alert("로그인 실패", "아이디 또는 비밀번호가 올바르지 않습니다.");
       }
