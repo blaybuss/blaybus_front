@@ -11,6 +11,9 @@ import {
   NativeScrollEvent,
 } from "react-native";
 import { useRouter } from "expo-router";
+import Logo from "@/assets/images/LOGO.svg";
+import LandingImport1 from "../assets/images/landingImport1.svg";
+import LandingImport2 from "../assets/images/landingImport2.svg";
 
 const { width } = Dimensions.get("window");
 
@@ -27,7 +30,7 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: "1",
-    image: require("../assets/images/LOGO.svg"),
+    image: Logo,
   },
   {
     id: "2",
@@ -36,7 +39,7 @@ const slides: Slide[] = [
       { text: "경험치를 얻어 일 속에", fontSize: 20 },
       { text: "즐거움을 얻어보세요!", fontSize: 20 },
     ],
-    image: require("../assets/images/landingImport1.svg"),
+    image: LandingImport1,
   },
   {
     id: "3",
@@ -46,7 +49,7 @@ const slides: Slide[] = [
       { text: "한 번의 클릭으로 내 성과를", fontSize: 20 },
       { text: "확인해보세요!", fontSize: 20 },
     ],
-    image: require("../assets/images/landingImport2.svg"),
+    image: LandingImport2,
   },
 ];
 
