@@ -5,16 +5,14 @@ const defaultConfig = getDefaultConfig(__dirname);
 
 const customConfig = {
   resolver: {
+    assetExts: defaultConfig.resolver.assetExts.filter((ext) => ext !== "svg"),
+    sourceExts: [...defaultConfig.resolver.sourceExts, "svg"],
     extraNodeModules: new Proxy(
       {},
       {
-        get: (target, name) => {
-          return path.join(__dirname, "../../node_modules/@example-app/shared");
-        },
+        get: (target, name) => path.join(__dirname, "node_modules", name), // 경로 수정
       }
     ),
-    assetExts: defaultConfig.resolver.assetExts.filter((ext) => ext !== "svg"),
-    sourceExts: [...defaultConfig.resolver.sourceExts, "svg"],
   },
   transformer: {
     babelTransformerPath: require.resolve("react-native-svg-transformer"),
@@ -22,9 +20,9 @@ const customConfig = {
   watchFolders: [
     path.resolve(__dirname, "../"),
     path.resolve(__dirname, "../.."),
-    path.resolve(__dirname, "../../node_modules/@example-app/shared"),
-  ],
+  ], 
 };
 
 module.exports = mergeConfig(defaultConfig, customConfig);
+
 
