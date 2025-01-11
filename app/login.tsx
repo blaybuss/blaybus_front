@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useRouter } from "expo-router";
+
 import Logo from "../assets/images/LOGO.svg";
 import MessageIcon from "../assets/images/message.svg";
 import LockIcon from "../assets/images/lock.svg";

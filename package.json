@@ -49,10 +49,13 @@
   },
   "private": true,
   "expo": {
-  "doctor": {
-    "reactNativeDirectoryCheck": {
-      "exclude": ["react-native-bouncy-checkbox", "react-native-navigation"]
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-native-bouncy-checkbox",
+          "react-native-navigation"
+        ]
+      }
     }
   }
-}
 }
