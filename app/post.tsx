@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, EmptyCircle } from "react-native";
 import RedCheck from "../assets/images/redCheck.svg"; 
 
 interface PostCardProps {
@@ -9,6 +9,12 @@ interface PostCardProps {
   isNew: boolean; 
   isChecked: boolean; 
   onPress: () => void; 
+}
+const isRead = {
+  //분홍  : 한번이라도 읽은 것
+  //흰색 : 안읽은 것
+  //체크 : 본인이 저장한 것
+  
 }
 
 const PostCard: React.FC<PostCardProps> = ({

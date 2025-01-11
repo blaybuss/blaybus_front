@@ -3,34 +3,34 @@ import {
   View,
   Text,
   FlatList,
-  Image,
-  Dimensions,
   StyleSheet,
   TouchableOpacity,
+  Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
 import { useRouter } from "expo-router";
+import {SvgProps} from "react-native-svg";
 import Logo from "@/assets/images/LOGO.svg";
-import LandingImport1 from "../assets/images/landingImport1.svg";
-import LandingImport2 from "../assets/images/landingImport2.svg";
+import LandingImport1 from "@/assets/images/landingImport1.svg";
+import LandingImport2 from "@/assets/images/landingImport2.svg";
 
 const { width } = Dimensions.get("window");
 
 type Slide = {
   id: string;
-  image: any;
+  Svg: React.FC<SvgProps>; // SVG 컴포넌트 타입
   texts?: {
     text: string;
     fontSize: number;
-    fontWeight?: string;
+    fontWeight?: "normal" | "bold";
   }[];
 };
 
 const slides: Slide[] = [
   {
     id: "1",
-    image: Logo,
+    Svg: Logo,
   },
   {
     id: "2",
@@ -39,7 +39,7 @@ const slides: Slide[] = [
       { text: "경험치를 얻어 일 속에", fontSize: 20 },
       { text: "즐거움을 얻어보세요!", fontSize: 20 },
     ],
-    image: LandingImport1,
+    Svg: LandingImport1,
   },
   {
     id: "3",
@@ -49,7 +49,7 @@ const slides: Slide[] = [
       { text: "한 번의 클릭으로 내 성과를", fontSize: 20 },
       { text: "확인해보세요!", fontSize: 20 },
     ],
-    image: LandingImport2,
+    Svg: LandingImport2,
   },
 ];
 
@@ -77,30 +77,34 @@ export default function LandingPage() {
         onScroll={handleScroll}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={[styles.slide, { width }]}>
-            <Image source={item.image} style={styles.image} />
-            {item.texts &&
-              item.texts.map((textItem, index) => (
-                <Text
-                  key={index}
-                  style={{
-                    fontSize: 16,
-                    fontWeight: "normal",
-                    textAlign: "center",
-                    marginBottom: 10,
-                  }}
-                >
-                  {textItem.text}
-                </Text>
-              ))}
-          </View>
-        )}
+        renderItem={({ item }) => {
+          const SvgComponent = item.Svg;
+          return (
+            <View style={[styles.slide, { width }]}>
+              <SvgComponent width={200} height={200} style={styles.image} />
+              {item.texts &&
+                item.texts.map((textItem, index) => (
+                  <Text
+                    key={index}
+                    style={[
+                      styles.text,
+                      {
+                        fontSize: textItem.fontSize,
+                        fontWeight: textItem.fontWeight || "normal",
+                      },
+                    ]}
+                  >
+                    {textItem.text}
+                  </Text>
+                ))}
+            </View>
+          );
+        }}
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[
-            currentIndex === 0 ? styles.buttonDisabled : styles.buttonEnabled,
+            currentIndex === 2 ? styles.buttonEnabled : styles.buttonDisabled,
           ]}
           onPress={handleButtonPress}
           disabled={currentIndex !== 2}
@@ -124,22 +128,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   image: {
-    width: 200,
-    height: 200,
-    resizeMode: "contain",
     marginBottom: 20,
+  },
+  text: {
+    textAlign: "center",
+    marginBottom: 10,
   },
   buttonEnabled: {
     backgroundColor: "#000",
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: "center",
+    width: "80%",
   },
   buttonDisabled: {
     backgroundColor: "#D9D9D9",
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: "center",
+    width: "80%",
   },
   buttonText: {
     color: "#fff",
@@ -150,7 +157,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 50,
     width: "100%",
-    paddingHorizontal: 20,
     alignItems: "center",
   },
 });
