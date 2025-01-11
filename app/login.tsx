@@ -24,7 +24,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const router = useRouter(); // Expo Router의 useRouter 사용
+  const router = useRouter(); 
 
   const handleLogin = async () => {
     if (!username || !password) {
