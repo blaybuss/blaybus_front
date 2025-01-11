@@ -4,12 +4,12 @@
     "slug": "blaybus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/LOGO.png", 
+    "icon": "./assets/images/LOGO.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/LOGO.png", 
+      "image": "./assets/images/LOGO.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,17 +18,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/LOGO.png", 
+        "foregroundImage": "./assets/images/LOGO.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/LOGO.png" 
+      "favicon": "./assets/images/LOGO.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
