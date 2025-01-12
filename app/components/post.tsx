@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, EmptyCircle } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RedCheck from "../assets/images/redCheck.svg"; 
+import EmptyCircle from "../assets/image/EmptyCicle.svg";
 
 interface PostCardProps {
   category: string; 
@@ -10,12 +11,6 @@ interface PostCardProps {
   isChecked: boolean; 
   onPress: () => void; 
 }
-const isRead = {
-  //분홍  : 한번이라도 읽은 것
-  //흰색 : 안읽은 것
-  //체크 : 본인이 저장한 것
-  
-}
 
 const PostCard: React.FC<PostCardProps> = ({
   category,
@@ -24,11 +19,22 @@ const PostCard: React.FC<PostCardProps> = ({
   isNew,
   isChecked,
   onPress,
+  
 }) => {
+  const [ isRead, setIsRead ] = React.useState(false);
+
+  const handlePress = () => {
+    setIsRead(true); 
+    onPress(); 
+  };
+
   return (
     <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
+      style={[
+        styles.container,
+        { backgroundColor: isRead ? "#ffe6e6" : "#ffffff" }, // 읽음 상태에 따른 배경색
+      ]}
+      onPress={handlePress}
     >
       <View style={styles.header}>
         <Text style={styles.category}>{category}</Text>
@@ -40,15 +46,10 @@ const PostCard: React.FC<PostCardProps> = ({
       <Text style={styles.content}>{content}</Text>
 
       <View style={styles.iconContainer}>
-        { isRead ? (<RedCheck
-          width={20}
-          height={20}
-          fill={isChecked ? "#ff0000" : "#cccccc"}
-        />) : (
-            <EmptyCircle
-                width={24}
-                height={24}
-                fill="#d9d9d9"/>
+        {isChecked ? (
+          <RedCheck width={20} height={20} fill="#ff0000" />
+        ) : (
+          <EmptyCircle width={24} height={24} fill="#d9d9d9" />
         )}
       </View>
     </TouchableOpacity>
@@ -103,4 +104,3 @@ const styles = StyleSheet.create({
 });
 
 export default PostCard;
-

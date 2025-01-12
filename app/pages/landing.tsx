@@ -19,7 +19,7 @@ const { width } = Dimensions.get("window");
 
 type Slide = {
   id: string;
-  Svg: React.FC<SvgProps>; // SVG 컴포넌트 타입
+  Svg: React.FC<SvgProps>; 
   texts?: {
     text: string;
     fontSize: number;
