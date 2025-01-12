@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     borderRadius: 10,
     paddingVertical: 15,
-    width: "100%",
+    width: "150%",
     alignItems: "center",
   },
   loginButtonDisabled: {

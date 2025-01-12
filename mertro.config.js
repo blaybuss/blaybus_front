@@ -10,7 +10,7 @@ const customConfig = {
     extraNodeModules: new Proxy(
       {},
       {
-        get: (target, name) => path.join(__dirname, "node_modules", name), // 경로 수정
+        get: (target, name) => path.join(__dirname, "node_modules", name), 
       }
     ),
   },

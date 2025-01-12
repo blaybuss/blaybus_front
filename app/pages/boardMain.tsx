@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import PostCard from "../components/post"; 
 import { useRouter } from "expo-router";
+import Ranking from "../components/ranking";
 
 const dummyPostData = [
   {
@@ -31,11 +32,11 @@ const dummyPostData = [
 ];
 
 const dummyRankingData = [
-  { id: "1", name: "김지수", team: "사업기획팀", rank: 1 },
-  { id: "2", name: "김지수", team: "사업기획팀", rank: 2 },
-  { id: "3", name: "김지수", team: "사업기획팀", rank: 3 },
-  { id: "4", name: "김지수", team: "사업기획팀", rank: 4 },
-  { id: "5", name: "김지수", team: "사업기획팀", rank: 5 },
+  { id: "1", name: "김지수", team: "사업기획팀", rank: 1, progress: 90 },
+  { id: "2", name: "김지수", team: "사업기획팀", rank: 2 , progress: 80},
+  { id: "3", name: "김지수", team: "사업기획팀", rank: 3 , progress : 70},
+  { id: "4", name: "김지수", team: "사업기획팀", rank: 4 , progress : 60},
+  { id: "5", name: "김지수", team: "사업기획팀", rank: 5 , progress : 50},
 ];
 
 export default function App() {
@@ -50,7 +51,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* 상단 탭 버튼 */}
       <View style={styles.tabContainer}>
         <TouchableOpacity
           style={[styles.tabButton, activeTab === "게시판" && styles.activeTab]}
@@ -66,7 +66,6 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-      {/* 탭 내용 */}
       {activeTab === "게시판" ? (
         <FlatList
           data={dummyPostData}
@@ -91,18 +90,19 @@ export default function App() {
             data={dummyRankingData}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <View style={styles.rankingItem}>
-                <Text style={styles.rankingNumber}>{item.rank}</Text>
-                <Text style={styles.rankingName}>{item.name}</Text>
-                <Text style={styles.rankingTeam}>{item.team}</Text>
-              </View>
+              <Ranking
+                rank={item.rank}
+                name={item.name}
+                team={item.team}
+                progress={item.progress}
+              />
             )}
           />
         </View>
       )}
     </View>
-  );
-}
+      );
+    }
 
 const styles = StyleSheet.create({
   container: {
